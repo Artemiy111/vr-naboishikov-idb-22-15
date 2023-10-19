@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.UIElements;
 public class UIHandler : MonoBehaviour
@@ -25,19 +24,20 @@ public class UIHandler : MonoBehaviour
         button = root.Q<Button>("MyButton");
         text = root.Q<Label>("CollisionText");
 
-
-        button.clicked += () =>
-        {
-
-            if (cube.activeSelf)
-            {
-                cube.SetActive(false);
-            }
-            else cube.SetActive(true);
-        };
+        button.clicked += () => ToggleObject(cube);
     }
 
-    public void showCollisionScore()
+    private void ToggleObject(GameObject obj)
+    {
+        if (obj.activeSelf)
+        {
+            obj.SetActive(false);
+        }
+        else obj.SetActive(true);
+
+    }
+
+    public void ShowCollisionScore()
     {
         text.text = "Score: " + playerHandler.countCollision;
     }
